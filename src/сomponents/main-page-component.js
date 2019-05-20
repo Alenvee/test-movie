@@ -1,28 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
+import { Link } from 'react-router-dom';
 
-function MainPageComponent() {
-    const [data, setData] = useState(0);
+@inject('movieStore')
+@observer
+class MainPageComponent extends Component {
 
-    useEffect(() => {
-        const fetch = async () => {
-            const result = await axios(
-                'http://api.themoviedb.org/3/movie/now_playing?api_key=ebea8cfca72fdff8d2624ad7bbf78e4c',
-            );
-            console.log('result', result);
-            setData(result.data);
-        console.log('data', data)
-        }
-        fetch()
-    }, [!data]);
+  componentDidMount() {
+    this.props.movieStore.getMovies();
+  }
 
-
-
+  render() {
+    const movies = [...this.props.movieStore.movies];
     return (
-        <React.Fragment>
-            <p>content</p>
-        </React.Fragment>
+      <React.Fragment>
+        {movies.map((movie) => (
+          <div key={movie.id} style={{ border: '1px solid black', marginBottom: 10 }}>
+            <Link to={`/desc${movie.id}`}>
+              <div>{movie.title}</div>
+              <img src={`http://image.tmdb.org/t/p/w342/${movie.backdrop_path}`} alt={movie.title} />
+            </Link>
+          </div>
+        ))}
+      </React.Fragment>
     );
+  }
 }
 
 export default MainPageComponent;

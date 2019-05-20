@@ -129,6 +129,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@babel/preset-stage-2": "^7.0.0"
+    "@babel/preset-stage-2": "^7.0.0",
+    "@csstools/normalize.css": "^10.0.0"
   }
 }

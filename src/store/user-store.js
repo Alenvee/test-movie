@@ -1,7 +1,7 @@
-import { observable, computed, action, decorate } from "mobx";
+import { observable, action } from "mobx";
 import { BaseStore } from './base-store';
 
-export default class UserStore extends BaseStore {
+export class UserStore extends BaseStore {
     @observable isAuthentificated = false;
 
     @action getAuthToken() {
