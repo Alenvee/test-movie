@@ -1,15 +1,16 @@
 import React from 'react';
+import { inject } from 'mobx-react';
 
-function MenuContainer() {
-    const singOut = () => {
-        localStorage.setItem('isAuthenticated', false)
-    };
-    return (
-        <React.Fragment>
-            <p>menu</p>
-            <button onClick={singOut}>Sing Out</button>
-        </React.Fragment>
-    );
+@inject('userStore')
+class MenuContainer extends React.Component {
+    render() {
+        return (
+            <React.Fragment>
+                <p>menu</p>
+                <button onClick={this.props.userStore.logout}>Sing Out</button>
+            </React.Fragment>
+        );
+    }
 }
 
 export default MenuContainer;
